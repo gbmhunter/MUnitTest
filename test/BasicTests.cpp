@@ -24,7 +24,7 @@ namespace MUnitTestTestsNs
 			std::cout << "Testing" << std::endl;
 			CHECK(false);
 			// Check capacity is calculated correctly
-			//CHECK_EQUAL("Testing", myString.cStr);
+			CHECK_EQUAL("Testing", "Testing1");
 		}
 
 } // namespace MUnitTestTestsNs

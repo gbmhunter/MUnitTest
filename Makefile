@@ -23,6 +23,10 @@ EXAMPLE_OBJ_FILES := $(patsubst %.cpp,%.o,$(wildcard example/*.cpp))
 EXAMPLE_LD_FLAGS := 
 EXAMPLE_CC_FLAGS := -Wall -g -c -I. -I./lib -std=gnu++11
 
+DEP_LIB_PATHS := -L ../MStringCpp
+DEP_LIBS := -l MStringCpp
+DEP_INCLUDE_PATHS := -I../
+
 .PHONY: depend clean
 
 # All
@@ -40,7 +44,7 @@ mUnitTestLib : $(SRC_OBJ_FILES)
 # Generic rule for src object files
 src/%.o: src/%.cpp
 	# Compiling src/ files
-	$(SRC_CC) $(SRC_CC_FLAGS) -MD -o $@ $<
+	$(SRC_CC) $(SRC_CC_FLAGS) -MD -o $@ $< $(DEP_INCLUDE_PATHS)
 	-@cp $*.d $*.P >/dev/null 2>&1; \
 	sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 		-e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $*.P; \
@@ -59,7 +63,7 @@ test : $(TEST_OBJ_FILES) | mUnitTestLib
 # Generic rule for test object files
 test/%.o: test/%.cpp
 	# Compiling test/ files
-	$(TEST_CC) $(TEST_CC_FLAGS) -MD -o $@ $<
+	$(TEST_CC) $(TEST_CC_FLAGS) -MD -o $@ $< $(DEP_INCLUDE_PATHS)
 	-@cp $*.d $*.P >/dev/null 2>&1; \
 	sed -e 's/#.*//' -e 's/^[^:]*: *//' -e 's/ *\\$$//' \
 		-e '/^$$/ d' -e 's/$$/ :/' < $*.d >> $*.P; \

@@ -36,9 +36,6 @@ namespace MbeddedNinja
 #include <vector>
 #include <iostream>
 
-// User libraries
-// none
-
 // User headers
 // none
 
@@ -46,22 +43,24 @@ namespace MbeddedNinja
 
 // Used for creating tests
 #define MTEST(Name)											\
-	class Test##Name : public Test									\
+	class Test##Name : public Test							\
 	{														\
 	public:													\
 		Test##Name() : Test(#Name, __FILE__, __LINE__){}	\
 		~Test##Name(){};									\
-		virtual void Run();\
+		virtual void Run();									\
 															\
-	} test##Name##Object;														\
-										\
-	AddToRegisterObj reg##Name(&test##Name##Object);				\
+	} test##Name##Object;									\
+															\
+	AddToRegisterObj reg##Name(&test##Name##Object);		\
 	void Test##Name::Run()
 
 
-#define CHECK(value)									\
-	if(!value)											\
-	TestRegister::CheckFailed(__FILE__, __LINE__);
+#define CHECK(value)													\
+	TestRegister::Check(value, __FILE__, __LINE__);
+
+#define CHECK_EQUAL(actual, expected)									\
+	TestRegister::CheckEqual(actual, expected, __FILE__, __LINE__);
 
 //===============================================================================================//
 //======================================== NAMESPACE ============================================//
@@ -110,33 +109,7 @@ namespace MbeddedNinja
 			const char * file;
 			uint32_t line;
 				
-		private:
-						
-			//======================================================================================//
-			//=================================== PRIVATE METHODS ==================================//
-			//======================================================================================//
-			
-			// none
-			
-			//======================================================================================//
-			//================================== PRIVATE VARIABLES =================================//
-			//======================================================================================//
 
-
-
-		protected:
-
-			//======================================================================================//
-			//=================================== PROTECTED METHODS ================================//
-			//======================================================================================//
-			
-			// none
-			
-			//======================================================================================//
-			//================================== PROTECTED VARIABLES ===============================//
-			//======================================================================================//
-
-			// none
 		
 	}; // class MUnitTest
 
@@ -177,12 +150,30 @@ namespace MbeddedNinja
 
 		}
 
-		static void CheckFailed(const char * file, uint32_t line)
+		template< typename Actual >
+		static void Check(Actual const & actual, const char * file, uint32_t line)
 		{
-			std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
-				"failed CHECK() in file '" << file << "'  on line '" << line << "'." << std::endl;
-
+			if(!actual)
+			{
+				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
+						"failed CHECK() in file '" << file << "'  on line '" << line << "'." << std::endl;
+			}
 		}
+
+		//! @brief		Template method to compare two variables.
+		template< typename Expected, typename Actual >
+		static void CheckEqual(Expected const& expected, Actual const& actual, const char * file, uint32_t line)
+		{
+			if (!(expected == actual))
+			{
+
+				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
+										"failed CHECK_EQUAL() in file '" << file << "'  on line '" << line << "'." << std::endl;
+				std::cout << "Expected = '" << expected << "', actual = '" << actual << "'." << std::endl;
+
+			}
+		}
+
 
 	};
 
@@ -199,6 +190,7 @@ namespace MbeddedNinja
 		}
 
 	};
+
 
 
 
