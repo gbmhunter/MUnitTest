@@ -23,8 +23,8 @@ EXAMPLE_OBJ_FILES := $(patsubst %.cpp,%.o,$(wildcard example/*.cpp))
 EXAMPLE_LD_FLAGS := 
 EXAMPLE_CC_FLAGS := -Wall -g -c -I. -I./lib -std=gnu++11
 
-DEP_LIB_PATHS := -L ../MStringCpp
-DEP_LIBS := -l MStringCpp
+DEP_LIB_PATHS := -L 
+DEP_LIBS := -l 
 DEP_INCLUDE_PATHS := -I../
 
 .PHONY: depend clean
