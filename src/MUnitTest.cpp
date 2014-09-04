@@ -44,6 +44,8 @@ namespace MbeddedNinja
 	std::vector<Test*> * TestRegister::listOfTestsPtr = nullptr;
 
 	uint32_t TestRegister::currentTestIndex = 0;
+	uint32_t TestRegister::numTestsThatFailed = 0;
+	bool TestRegister::currTestFailed = false;
 
 	//===========================================================================================//
 	//=========================== PUBLIC OPERATOR OVERLOAD DEFINITIONS ==========================//

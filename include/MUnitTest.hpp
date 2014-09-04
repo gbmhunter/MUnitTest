@@ -120,6 +120,8 @@ namespace MbeddedNinja
 
 		static std::vector<Test*> * listOfTestsPtr;
 		static uint32_t currentTestIndex;
+		static uint32_t numTestsThatFailed;
+		static bool currTestFailed;
 
 		static void RegisterTest(Test * testToRegister)
 		{
@@ -138,15 +140,23 @@ namespace MbeddedNinja
 		{
 			std::cout << "RunAllTests() called.\r\n" << std::endl;
 			//listOfTests.push_back(nullptr);
-			std::cout << "listOfTests.size() = " << listOfTestsPtr->size() << "'." << std::endl;
+			std::cout << "listOfTests.size() = '" << listOfTestsPtr->size() << "'." << std::endl;
 
-			for(uint16_t x = 0; x < TestRegister::listOfTestsPtr->size(); x++)
+			for(currentTestIndex = 0; currentTestIndex < TestRegister::listOfTestsPtr->size(); currentTestIndex++)
 			{
 				// Run test
-				std::cout << "Running unit test.\r\n" << std::endl;
-				(*listOfTestsPtr)[x]->Run();
+				//std::cout << "Running unit test.\r\n" << std::endl;
+				currTestFailed = false;
+				(*listOfTestsPtr)[currentTestIndex]->Run();
+				if(currTestFailed)
+					numTestsThatFailed++;
 
 			}
+
+			std::cout << "TEST SUMMARY:" << std::endl;
+			std::cout << "Num of tests = '" << listOfTestsPtr->size() << "'." << std::endl;
+			std::cout << "Num. passed = '" << listOfTestsPtr->size() - numTestsThatFailed << "'." << std::endl;
+			std::cout << "Num. failed = '" << numTestsThatFailed << "'." << std::endl;
 
 		}
 

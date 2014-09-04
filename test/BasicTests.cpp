@@ -18,11 +18,18 @@ using namespace MbeddedNinja;
 namespace MUnitTestTestsNs
 {
 
-		MTEST(BasicCapacityTest)
+		MTEST(BasicTest)
 		{
-			//MbeddedNinja::MString myString("Testing");
-			std::cout << "Testing" << std::endl;
+
+			//std::cout << "Testing" << std::endl;
 			CHECK(false);
+
+		}
+
+		MTEST(BasicCheckEqualTest)
+		{
+
+
 			// Check capacity is calculated correctly
 			CHECK_EQUAL("Testing", "Testing1");
 		}

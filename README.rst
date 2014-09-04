@@ -11,8 +11,8 @@ A microcontroller-friendly C++ unit test module specifically designed for embedd
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-09-04
-- Last Modified: 2014-09-04
-- Version: v1.2.1.0
+- Last Modified: 2014-09-05
+- Version: v1.3.0.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -26,7 +26,9 @@ A microcontroller-friendly C++ unit test module specifically designed for embedd
 Description
 ===========
 
+A microcontroller-friendly C++ unit test module specifically designed for embedded applications.
 
+To be compatible with mid-range microcontrollers, no exceptions are used, the entire module has a no-throw guarantee.
 	
 
 External Dependencies
@@ -48,6 +50,33 @@ Usage
 =====
 
 See the unit tests in the 'test/' directory for basic examples.
+
+::
+
+	MTEST(BasicTestThatWillAlwaysFail)
+	{
+		CHECK(false);
+	}
+	
+	MTEST(BasicTestThatWillAlwaysPass)
+	{
+		CHECK(true);
+	}
+	
+	MTEST(MakeSureMyVarIsFive)
+	{
+		CHECK_EQUAL(myVar, 5);
+	}
+	
+	int main()
+	{
+		// Run all tests, this will run the 
+		// three above
+		TestRegister::RunAllTests();
+		
+		return 0;
+	{
+	
 	
 Changelog
 =========
@@ -55,6 +84,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version   Date       Comment
 ========= ========== ===================================================================================================
+v1.3.0.0  2014-09-05 Fixed bug where unit test engine reports the incorrect first test name for the second test when there are two tests, closes #6. At completion of unit tests, the number the passed and failed is printed to user, closes #5. Added basic example to README, closes #7.
 v1.2.1.0  2014-09-04 Got rid of unneccessary MStringCpp dependency in Makefile.
 v1.2.0.0  2014-09-04 Added CHECK_EQUAL() macro and added tests to 'test/BasicTests.cpp', closes #3.
 v1.1.0.0  2014-09-04 Added CHECK() macro and added it to 'test/BasicTests.cpp', closes #2.
