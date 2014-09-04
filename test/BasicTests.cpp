@@ -22,6 +22,7 @@ namespace MUnitTestTestsNs
 		{
 			//MbeddedNinja::MString myString("Testing");
 			std::cout << "Testing" << std::endl;
+			CHECK(false);
 			// Check capacity is calculated correctly
 			//CHECK_EQUAL("Testing", myString.cStr);
 		}

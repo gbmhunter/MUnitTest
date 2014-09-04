@@ -41,7 +41,9 @@ namespace MbeddedNinja
 	//============================================================================================//
 
 	//std::vector<Test*> TestRegister::listOfTests;
-	std::vector<Test*> * TestRegister::listOfTestsPtr;
+	std::vector<Test*> * TestRegister::listOfTestsPtr = nullptr;
+
+	uint32_t TestRegister::currentTestIndex = 0;
 
 	//===========================================================================================//
 	//=========================== PUBLIC OPERATOR OVERLOAD DEFINITIONS ==========================//

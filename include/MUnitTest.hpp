@@ -58,6 +58,11 @@ namespace MbeddedNinja
 	AddToRegisterObj reg##Name(&test##Name##Object);				\
 	void Test##Name::Run()
 
+
+#define CHECK(value)									\
+	if(!value)											\
+	TestRegister::CheckFailed(__FILE__, __LINE__);
+
 //===============================================================================================//
 //======================================== NAMESPACE ============================================//
 //===============================================================================================//
@@ -101,7 +106,9 @@ namespace MbeddedNinja
 			//================================= PUBLIC VARIABLES ===================================//
 			//======================================================================================//
 				
-		
+			const char * name;
+			const char * file;
+			uint32_t line;
 				
 		private:
 						
@@ -115,9 +122,7 @@ namespace MbeddedNinja
 			//================================== PRIVATE VARIABLES =================================//
 			//======================================================================================//
 
-			const char * name;
-			const char * file;
-			uint32_t line;
+
 
 		protected:
 
@@ -141,6 +146,7 @@ namespace MbeddedNinja
 	public:
 
 		static std::vector<Test*> * listOfTestsPtr;
+		static uint32_t currentTestIndex;
 
 		static void RegisterTest(Test * testToRegister)
 		{
@@ -168,6 +174,13 @@ namespace MbeddedNinja
 				(*listOfTestsPtr)[x]->Run();
 
 			}
+
+		}
+
+		static void CheckFailed(const char * file, uint32_t line)
+		{
+			std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
+				"failed CHECK() in file '" << file << "'  on line '" << line << "'." << std::endl;
 
 		}
 
