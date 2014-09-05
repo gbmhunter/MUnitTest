@@ -20,10 +20,7 @@ namespace MUnitTestTestsNs
 
 		MTEST(BasicTest)
 		{
-
-			//std::cout << "Testing" << std::endl;
 			CHECK(false);
-
 		}
 
 		MTEST(BasicCheckEqualTest)
