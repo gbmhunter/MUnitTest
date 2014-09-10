@@ -116,12 +116,10 @@ namespace MbeddedNinja
 
 	class TestRegister
 	{
-	public:
 
-		static std::vector<Test*> * listOfTestsPtr;
-		static uint32_t currentTestIndex;
-		static uint32_t numTestsThatFailed;
-		static bool currTestFailed;
+
+
+	public:
 
 		static void RegisterTest(Test * testToRegister)
 		{
@@ -131,12 +129,9 @@ namespace MbeddedNinja
 			listOfTests.push_back(testToRegister);
 			listOfTestsPtr = &listOfTests;
 
-
-
-			//listOfTests.push_back(nullptr);
 		}
 
-		static void RunAllTests()
+		static uint8_t RunAllTests()
 		{
 			std::cout << "Running all unit tests..." << std::endl;
 			//std::cout << "RunAllTests() called.\r\n" << std::endl;
@@ -158,6 +153,13 @@ namespace MbeddedNinja
 			std::cout << "Num of tests = '" << listOfTestsPtr->size() << "'." << std::endl;
 			std::cout << "Num. passed = '" << listOfTestsPtr->size() - numTestsThatFailed << "'." << std::endl;
 			std::cout << "Num. failed = '" << numTestsThatFailed << "'." << std::endl;
+
+			// Return a C-style exit code, 0 if all pass, otherwise 1
+			// In a large OS, this value could be returned from main().
+			if(numTestsThatFailed == 0)
+				return 0;
+			else
+				return 1;
 
 		}
 
@@ -185,6 +187,12 @@ namespace MbeddedNinja
 			}
 		}
 
+
+	private:
+		static std::vector<Test*> * listOfTestsPtr;
+		static uint32_t currentTestIndex;
+		static uint32_t numTestsThatFailed;
+		static bool currTestFailed;
 
 	};
 

@@ -3,8 +3,8 @@
 # @author 			Geoffrey Hunter <gbmhunter@gmail.com> (wwww.mbedded.ninja)
 # @edited 			n/a
 # @created			2014-09-04
-# @last-modified 	2014-09-04
-# @brief 			Makefile for Linux-based make, to compile the MUnitTestCpp library, example code and run unit test code.
+# @last-modified 	2014-09-10
+# @brief 			Makefile for Linux-based make, to compile the MUnitTest library, example code and run unit test code.
 # @details
 #					See README in repo root dir for more info.
 
@@ -23,21 +23,21 @@ EXAMPLE_OBJ_FILES := $(patsubst %.cpp,%.o,$(wildcard example/*.cpp))
 EXAMPLE_LD_FLAGS := 
 EXAMPLE_CC_FLAGS := -Wall -g -c -I. -I./lib -std=gnu++11
 
-DEP_LIB_PATHS := -L 
+DEP_LIB_PATHS := -L
 DEP_LIBS := -l 
 DEP_INCLUDE_PATHS := -I../
 
 .PHONY: depend clean
 
 # All
-all: mUnitTestLib test
+all: src test
 	
 	# Run unit tests:
-	@./test/MUnitTestTests.elf
+	@./test/Tests.elf
 
 #======== String-Cpp LIB ==========#
 
-mUnitTestLib : $(SRC_OBJ_FILES)
+src : $(SRC_OBJ_FILES) 
 	# Make library
 	ar r libMUnitTest.a $(SRC_OBJ_FILES)
 	
@@ -56,9 +56,9 @@ src/%.o: src/%.cpp
 # ======== TEST ========
 	
 # Compiles unit test code
-test : $(TEST_OBJ_FILES) | mUnitTestLib
+test : $(TEST_OBJ_FILES) | src
 	# Compiling unit test code
-	g++ $(TEST_LD_FLAGS) -o ./test/MUnitTestTests.elf $(TEST_OBJ_FILES) -L./ -lMUnitTest
+	g++ $(TEST_LD_FLAGS) -o ./test/Tests.elf $(TEST_OBJ_FILES) -L./ -lMUnitTest $(DEP_LIB_PATHS) $(DEP_LIBS)
 
 # Generic rule for test object files
 test/%.o: test/%.cpp
@@ -75,16 +75,16 @@ test/%.o: test/%.cpp
 	
 # ====== CLEANING ======
 	
-clean: clean-ut clean-munittest
+clean: clean-ut clean-src
 	
 clean-ut:
 	@echo " Cleaning test object files..."; $(RM) ./test/*.o
 	@echo " Cleaning test executable..."; $(RM) ./test/*.elf
 	
-clean-munittest:
+clean-src:
 	@echo " Cleaning src object files..."; $(RM) ./src/*.o
 	@echo " Cleaning src dependency files..."; $(RM) ./src/*.d
-	@echo " Cleaning MUnitTestCpp static library..."; $(RM) ./*.a
+	@echo " Cleaning parimary source static library..."; $(RM) ./*.a
 	@echo " Cleaning test object files..."; $(RM) ./test/*.o
 	@echo " Cleaning test dependency files..."; $(RM) ./test/*.d
 	@echo " Cleaning test executable..."; $(RM) ./test/*.elf

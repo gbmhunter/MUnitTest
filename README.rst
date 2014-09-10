@@ -1,18 +1,18 @@
 ============
-MUnitTestCpp
+MUnitTest
 ============
 
 ------------------------------------------------------------------------------------------------
 A microcontroller-friendly C++ unit test module specifically designed for embedded applications.
 ------------------------------------------------------------------------------------------------
 
-.. image:: https://api.travis-ci.org/mbedded-ninja/MUnitTestCpp.png?branch=master   
-	:target: https://travis-ci.org/mbedded-ninja/MUnitTestCpp
+.. image:: https://api.travis-ci.org/mbedded-ninja/MUnitTest.png?branch=master   
+	:target: https://travis-ci.org/mbedded-ninja/MUnitTest
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-09-04
-- Last Modified: 2014-09-05
-- Version: v1.3.1.0
+- Last Modified: 2014-09-10
+- Version: v1.4.0.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -53,6 +53,8 @@ See the unit tests in the 'test/' directory for basic examples.
 
 ::
 
+	#include "MUnitTest/api/MUnitTestApi.hpp"
+
 	MTEST(BasicTestThatWillAlwaysFail)
 	{
 		CHECK(false);
@@ -71,10 +73,10 @@ See the unit tests in the 'test/' directory for basic examples.
 	int main()
 	{
 		// Run all tests, this will run the 
-		// three above
-		TestRegister::RunAllTests();
+		// three above, and return the result from main()
+		// 0 indicates all passed, 1 indicates at least 1 unit test failed
+		return TestRegister::RunAllTests();
 		
-		return 0;
 	{
 	
 	
@@ -84,6 +86,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version   Date       Comment
 ========= ========== ===================================================================================================
+v1.4.0.0  2014-09-10 TestRegister::RunAllTests() now returns 0 if successful, else 1, closes #9. Renamed module from 'MUnitTestCpp' to 'MUnitTest', updated README and Makefile accordingly.
 v1.3.1.0  2014-09-05 Fixed the bug where macros where missing 'MbeddedNinja' namespace scope from function calls and classes, closes #10.
 v1.3.0.0  2014-09-05 Fixed bug where unit test engine reports the incorrect first test name for the second test when there are two tests, closes #6. At completion of unit tests, the number the passed and failed is printed to user, closes #5. Added basic example to README, closes #7.
 v1.2.1.0  2014-09-04 Got rid of unneccessary MStringCpp dependency in Makefile.

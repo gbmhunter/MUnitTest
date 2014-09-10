@@ -20,15 +20,13 @@ namespace MUnitTestTestsNs
 
 		MTEST(BasicTest)
 		{
-			CHECK(false);
+			CHECK(true);
 		}
 
 		MTEST(BasicCheckEqualTest)
 		{
-
-
 			// Check capacity is calculated correctly
-			CHECK_EQUAL("Testing", "Testing1");
+			CHECK_EQUAL("Testing", "Testing");
 		}
 
 } // namespace MUnitTestTestsNs
