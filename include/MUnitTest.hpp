@@ -35,6 +35,7 @@ namespace MbeddedNinja
 #include <cstdint>		// int8_t, int32_t e.t.c
 #include <vector>
 #include <iostream>
+#include <cstring>
 
 // User headers
 // none
@@ -142,6 +143,9 @@ namespace MbeddedNinja
 			{
 				// Run test
 				//std::cout << "Running unit test.\r\n" << std::endl;
+
+				// Set currTestFailed flag to false perfore running test, running test
+				// will set this to true if test fails.
 				currTestFailed = false;
 				(*listOfTestsPtr)[currentTestIndex]->Run();
 				if(currTestFailed)
@@ -166,8 +170,10 @@ namespace MbeddedNinja
 		template< typename Actual >
 		static void Check(Actual const & actual, const char * file, uint32_t line)
 		{
+
 			if(!actual)
 			{
+				TestRegister::currTestFailed = true;
 				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
 						"failed CHECK() in file '" << file << "'  on line '" << line << "'." << std::endl;
 			}
@@ -177,9 +183,11 @@ namespace MbeddedNinja
 		template< typename Expected, typename Actual >
 		static void CheckEqual(Expected const& expected, Actual const& actual, const char * file, uint32_t line)
 		{
+			//std::cout << "CheckEqual with two templated vars called." << std::endl;
+
 			if (!(expected == actual))
 			{
-
+				TestRegister::currTestFailed = true;
 				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
 										"failed CHECK_EQUAL() in file '" << file << "'  on line '" << line << "'." << std::endl;
 				std::cout << "Expected = '" << expected << "', actual = '" << actual << "'." << std::endl;
@@ -187,6 +195,19 @@ namespace MbeddedNinja
 			}
 		}
 
+		static void CheckEqual(const char * expected, const char * actual, const char * file, uint32_t line)
+		{
+			//std::cout << "CheckEqual with two const char * called." << std::endl;
+			//std::cout << "strcmp() = '" << strcmp(expected, actual) << "'." << std::endl;
+			if (strcmp(expected, actual))
+			{
+				TestRegister::currTestFailed = true;
+				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
+										"failed CHECK_EQUAL() in file '" << file << "'  on line '" << line << "'." << std::endl;
+				std::cout << "Expected = '" << expected << "', actual = '" << actual << "'." << std::endl;
+
+			}
+		}
 
 	private:
 		static std::vector<Test*> * listOfTestsPtr;
