@@ -2,7 +2,7 @@
 //! @file				MUnitTest.hpp
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-09-03
-//! @last-modified		2014-09-05
+//! @last-modified		2014-09-14
 //! @brief				
 //! @details
 //!						See README.rst in repo root dir for more info.
@@ -58,10 +58,10 @@ namespace MbeddedNinja
 
 
 #define CHECK(value)													\
-	MbeddedNinja::TestRegister::Check(value, __FILE__, __LINE__);
+	MbeddedNinja::TestRegister::Check(value, __FILE__, __LINE__)
 
 #define CHECK_EQUAL(actual, expected)									\
-	MbeddedNinja::TestRegister::CheckEqual(actual, expected, __FILE__, __LINE__);
+	MbeddedNinja::TestRegister::CheckEqual(actual, expected, __FILE__, __LINE__)
 
 //===============================================================================================//
 //======================================== NAMESPACE ============================================//

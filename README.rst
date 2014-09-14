@@ -11,8 +11,8 @@ A microcontroller-friendly C++ unit test module specifically designed for embedd
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-09-04
-- Last Modified: 2014-09-13
-- Version: v1.4.1.0
+- Last Modified: 2014-09-14
+- Version: v1.4.2.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -86,6 +86,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version   Date       Comment
 ========= ========== ===================================================================================================
+v1.4.2.0  2014-09-14 Removed semi-colons from the end of the CHECK() and CHECK_EQUAL() macros, which forces you to provide them when you use the macro, and prevents errors when using inside if statements, closes #19.
 v1.4.1.0  2014-09-13 Number of tests that have passed/failed is now reported correctly, closes #16. Added CHECK_EQUAL() overload for two const char * data types, closes #18.
 v1.4.0.0  2014-09-10 TestRegister::RunAllTests() now returns 0 if successful, else 1, closes #9. Renamed module from 'MUnitTestCpp' to 'MUnitTest', updated README and Makefile accordingly.
 v1.3.1.0  2014-09-05 Fixed the bug where macros where missing 'MbeddedNinja' namespace scope from function calls and classes, closes #10.
