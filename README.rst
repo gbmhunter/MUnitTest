@@ -11,8 +11,8 @@ A microcontroller-friendly C++ unit test module specifically designed for embedd
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-09-04
-- Last Modified: 2014-09-14
-- Version: v1.4.2.0
+- Last Modified: 2014-09-16
+- Version: v1.5.0.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -65,9 +65,13 @@ See the unit tests in the 'test/' directory for basic examples.
 		CHECK(true);
 	}
 	
-	MTEST(MakeSureMyVarIsFive)
+	// The following test is inside a "test group"
+	MTEST_GROUP(MyTestGroup)
 	{
-		CHECK_EQUAL(myVar, 5);
+		MTEST(MakeSureMyVarIsFive)
+		{
+			CHECK_EQUAL(myVar, 5);
+		}
 	}
 	
 	int main()
@@ -86,6 +90,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version   Date       Comment
 ========= ========== ===================================================================================================
+v1.5.0.0  2014-09-16 Added MTEST_GROUP() macro so that you can group a bunch of unit tests together, added associated unit tests to 'test/GroupTests.cpp', closes #20.
 v1.4.2.0  2014-09-14 Removed semi-colons from the end of the CHECK() and CHECK_EQUAL() macros, which forces you to provide them when you use the macro, and prevents errors when using inside if statements, closes #19.
 v1.4.1.0  2014-09-13 Number of tests that have passed/failed is now reported correctly, closes #16. Added CHECK_EQUAL() overload for two const char * data types, closes #18.
 v1.4.0.0  2014-09-10 TestRegister::RunAllTests() now returns 0 if successful, else 1, closes #9. Renamed module from 'MUnitTestCpp' to 'MUnitTest', updated README and Makefile accordingly.

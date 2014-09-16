@@ -2,7 +2,7 @@
 //! @file				MUnitTest.hpp
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-09-03
-//! @last-modified		2014-09-14
+//! @last-modified		2014-09-16
 //! @brief				
 //! @details
 //!						See README.rst in repo root dir for more info.
@@ -31,18 +31,20 @@ namespace MbeddedNinja
 //========================================== INCLUDES ===========================================//
 //===============================================================================================//
 
-// System headers
+//===== SYSTEM LIBRARIES =====//
 #include <cstdint>		// int8_t, int32_t e.t.c
 #include <vector>
 #include <iostream>
 #include <cstring>
 
-// User headers
+//===== USER SOURCE =====//
 // none
 
-#define MTEST_GROUP
+//! @brief		Used for creating test groups.
+#define MTEST_GROUP(name)									\
+	namespace MTestGroup##name
 
-// Used for creating tests
+//! @brief 		Used for creating tests
 #define MTEST(Name)											\
 	class Test##Name : public MbeddedNinja::Test			\
 	{														\
@@ -57,9 +59,12 @@ namespace MbeddedNinja
 	void Test##Name::Run()
 
 
+//! @brief		Used to check a boolean expression
 #define CHECK(value)													\
 	MbeddedNinja::TestRegister::Check(value, __FILE__, __LINE__)
 
+//! @brief		Used to compare two variables. This is preferred over CHECK() as the error's when a CHECK_EQUAL()
+//!				fail are more descriptive.
 #define CHECK_EQUAL(actual, expected)									\
 	MbeddedNinja::TestRegister::CheckEqual(actual, expected, __FILE__, __LINE__)
 
