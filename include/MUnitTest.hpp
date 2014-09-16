@@ -68,6 +68,11 @@ namespace MbeddedNinja
 #define CHECK_EQUAL(actual, expected)									\
 	MbeddedNinja::TestRegister::CheckEqual(actual, expected, __FILE__, __LINE__)
 
+//! @brief		Used to compare two variables which a specified tolerance. This is useful for comparing
+//!				floats and doubles in where there can be rounding error.
+#define CHECK_CLOSE(actual, expected, tolerance)						\
+	MbeddedNinja::TestRegister::CheckClose(actual, expected, tolerance, __FILE__, __LINE__)
+
 //===============================================================================================//
 //======================================== NAMESPACE ============================================//
 //===============================================================================================//
@@ -210,6 +215,27 @@ namespace MbeddedNinja
 				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
 										"failed CHECK_EQUAL() in file '" << file << "'  on line '" << line << "'." << std::endl;
 				std::cout << "Expected = '" << expected << "', actual = '" << actual << "'." << std::endl;
+
+			}
+		}
+
+		//! @brief		Template method to compare two variables to within a specified tolerance.
+		template< typename Expected, typename Actual, typename Tolerance >
+		static void CheckClose(
+			Expected const& expected,
+			Actual const& actual,
+			Tolerance const& tolerance,
+			const char * file,
+			uint32_t line)
+		{
+			//std::cout << "CheckEqual with two templated vars called." << std::endl;
+
+			if ((actual >= (expected + tolerance)) || (actual <= (expected - tolerance)))
+			{
+				TestRegister::currTestFailed = true;
+				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
+										"failed CHECK_CLOSE() in file '" << file << "'  on line '" << line << "'." << std::endl;
+				std::cout << "Expected = '" << expected << "', actual = '" << actual << "', tolerance = '" << tolerance << "'." << std::endl;
 
 			}
 		}
