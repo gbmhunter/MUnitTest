@@ -2,7 +2,7 @@
 //! @file				MUnitTest.hpp
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-09-03
-//! @last-modified		2014-09-16
+//! @last-modified		2014-09-19
 //! @brief				
 //! @details
 //!						See README.rst in repo root dir for more info.
@@ -15,8 +15,8 @@
 //======================================== HEADER GUARD =========================================//
 //===============================================================================================//
 
-#ifndef MUNIT_TEST_CPP_MUNIT_TEST_H
-#define MUNIT_TEST_CPP_MUNIT_TEST_H
+#ifndef MUNIT_TEST_MUNIT_TEST_H
+#define MUNIT_TEST_MUNIT_TEST_H
 
 //===============================================================================================//
 //==================================== FORWARD DECLARATION ======================================//
@@ -185,57 +185,68 @@ namespace MbeddedNinja
 			{
 				TestRegister::currTestFailed = true;
 				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
-						"failed CHECK() in file '" << file << "'  on line '" << line << "'." << std::endl;
+						"failed CHECK() in file '" << file <<
+						"'  on line '" << line << "'." << std::endl;
 			}
 		}
 
 		//! @brief		Template method to compare two variables.
-		template< typename Expected, typename Actual >
-		static void CheckEqual(Expected const& expected, Actual const& actual, const char * file, uint32_t line)
+		template< typename Actual, typename Expected >
+		static void CheckEqual(Actual const& actual, Expected const& expected, const char * file, uint32_t line)
 		{
 			//std::cout << "CheckEqual with two templated vars called." << std::endl;
 
-			if (!(expected == actual))
+			if (!(actual == expected))
 			{
 				TestRegister::currTestFailed = true;
 				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
-										"failed CHECK_EQUAL() in file '" << file << "'  on line '" << line << "'." << std::endl;
-				std::cout << "Expected = '" << expected << "', actual = '" << actual << "'." << std::endl;
+						"failed CHECK_EQUAL() in file '" << file << "'  on line '" << line << "'." << std::endl;
+				std::cout << "Actual = '" << actual <<
+						"', expected = '" << expected << "'." << std::endl;
 
 			}
 		}
 
-		static void CheckEqual(const char * expected, const char * actual, const char * file, uint32_t line)
+		static void CheckEqual(const char * actual, const char * expected, const char * file, uint32_t line)
 		{
 			//std::cout << "CheckEqual with two const char * called." << std::endl;
 			//std::cout << "strcmp() = '" << strcmp(expected, actual) << "'." << std::endl;
-			if (strcmp(expected, actual))
+			if (strcmp(actual, expected))
 			{
 				TestRegister::currTestFailed = true;
-				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
-										"failed CHECK_EQUAL() in file '" << file << "'  on line '" << line << "'." << std::endl;
-				std::cout << "Expected = '" << expected << "', actual = '" << actual << "'." << std::endl;
+				std::cout <<
+						"Unit test '" <<
+						((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name <<
+						"' failed due to "
+						"failed CHECK_EQUAL() in file '" << file <<
+						"'  on line '" << line << "'." << std::endl;
+				std::cout << "Actual = '" << actual <<
+						"', expected = '" << expected << "'." << std::endl;
 
 			}
 		}
 
 		//! @brief		Template method to compare two variables to within a specified tolerance.
-		template< typename Expected, typename Actual, typename Tolerance >
+		template< typename Actual, typename Expected, typename Tolerance >
 		static void CheckClose(
-			Expected const& expected,
 			Actual const& actual,
+			Expected const& expected,
 			Tolerance const& tolerance,
 			const char * file,
 			uint32_t line)
 		{
-			//std::cout << "CheckEqual with two templated vars called." << std::endl;
 
 			if ((actual >= (expected + tolerance)) || (actual <= (expected - tolerance)))
 			{
 				TestRegister::currTestFailed = true;
-				std::cout << "Unit test '" << ((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name << "' failed due to "
-										"failed CHECK_CLOSE() in file '" << file << "'  on line '" << line << "'." << std::endl;
-				std::cout << "Expected = '" << expected << "', actual = '" << actual << "', tolerance = '" << tolerance << "'." << std::endl;
+				std::cout <<
+					"Unit test '" <<
+					((*TestRegister::listOfTestsPtr)[TestRegister::currentTestIndex])->name <<
+					"' failed due to "
+					"failed CHECK_CLOSE() in file '" << file << "'  on line '" << line << "'." << std::endl;
+				std::cout << "Actual = '" << actual <<
+					"', expected = '" << expected <<
+					"', tolerance = '" << tolerance << "'." << std::endl;
 
 			}
 		}
@@ -263,12 +274,8 @@ namespace MbeddedNinja
 	};
 
 
-
-
-
-
 } // namespace MbeddedNinja
 
-#endif	// #ifndef MUNIT_TEST_CPP_MUNIT_TEST_H
+#endif	// #ifndef MUNIT_TEST_MUNIT_TEST_H
 
 // EOF

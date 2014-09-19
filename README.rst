@@ -1,6 +1,6 @@
-============
+=========
 MUnitTest
-============
+=========
 
 ------------------------------------------------------------------------------------------------
 A microcontroller-friendly C++ unit test module specifically designed for embedded applications.
@@ -11,8 +11,8 @@ A microcontroller-friendly C++ unit test module specifically designed for embedd
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-09-04
-- Last Modified: 2014-09-16
-- Version: v1.6.0.0
+- Last Modified: 2014-09-19
+- Version: v1.6.1.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -90,6 +90,7 @@ Changelog
 ========= ========== ===================================================================================================
 Version   Date       Comment
 ========= ========== ===================================================================================================
+v1.6.1.0  2014-09-19 Corrected actual and expected variables that were the wrong way around in the CheckEqual() and CheckClose() methods defined in MUnitTest.hpp, closes #22.
 v1.6.0.0  2014-09-16 Add CHECK_CLOSE() macro for checking things like floats and doubles which may have small rounding errors, closes #21.
 v1.5.0.0  2014-09-16 Added MTEST_GROUP() macro so that you can group a bunch of unit tests together, added associated unit tests to 'test/GroupTests.cpp', closes #20.
 v1.4.2.0  2014-09-14 Removed semi-colons from the end of the CHECK() and CHECK_EQUAL() macros, which forces you to provide them when you use the macro, and prevents errors when using inside if statements, closes #19.
