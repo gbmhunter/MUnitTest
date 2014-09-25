@@ -11,8 +11,8 @@ A microcontroller-friendly C++ unit test module specifically designed for embedd
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-09-04
-- Last Modified: 2014-09-19
-- Version: v1.6.1.0
+- Last Modified: 2014-09-26
+- Version: v1.6.2.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -87,9 +87,10 @@ See the unit tests in the 'test/' directory for basic examples.
 Changelog
 =========
 
-========= ========== ===================================================================================================
+========= ========== ======================================================================================
 Version   Date       Comment
-========= ========== ===================================================================================================
+========= ========== ======================================================================================
+v1.6.2.0  2014-09-26 Added all possible overload variations for CHECK_EQUAL() for C-style strings, currently only a few permutations are defined, and added associated unit tests to new file 'test/CStringTests.cpp', closes #24.
 v1.6.1.0  2014-09-19 Corrected actual and expected variables that were the wrong way around in the CheckEqual() and CheckClose() methods defined in MUnitTest.hpp, closes #22.
 v1.6.0.0  2014-09-16 Add CHECK_CLOSE() macro for checking things like floats and doubles which may have small rounding errors, closes #21.
 v1.5.0.0  2014-09-16 Added MTEST_GROUP() macro so that you can group a bunch of unit tests together, added associated unit tests to 'test/GroupTests.cpp', closes #20.
@@ -102,4 +103,4 @@ v1.2.1.0  2014-09-04 Got rid of unneccessary MStringCpp dependency in Makefile.
 v1.2.0.0  2014-09-04 Added CHECK_EQUAL() macro and added tests to 'test/BasicTests.cpp', closes #3.
 v1.1.0.0  2014-09-04 Added CHECK() macro and added it to 'test/BasicTests.cpp', closes #2.
 v1.0.0.0  2014-09-04 Initial commit. Basic TEST() macro works and test code called correctly in ''test/BasicTests.cpp'.
-========= ========== ===================================================================================================
+========= ========== ======================================================================================

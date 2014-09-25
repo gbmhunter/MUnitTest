@@ -2,7 +2,7 @@
 //! @file				MUnitTest.hpp
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-09-03
-//! @last-modified		2014-09-19
+//! @last-modified		2014-09-26
 //! @brief				
 //! @details
 //!						See README.rst in repo root dir for more info.
@@ -210,6 +210,28 @@ namespace MbeddedNinja
 		static void CheckEqual(const char * actual, const char * expected, const char * file, uint32_t line)
 		{
 			//std::cout << "CheckEqual with two const char * called." << std::endl;
+			CheckEqualForCStrings(actual, expected, file, line);
+		}
+
+		static void CheckEqual(char * actual, char * expected, const char * file, uint32_t line)
+		{
+			//std::cout << "CheckEqual with two char * called." << std::endl;
+			CheckEqualForCStrings(actual, expected, file, line);
+		}
+
+		static void CheckEqual(const char * actual, char * expected, const char * file, uint32_t line)
+		{
+			CheckEqualForCStrings(actual, expected, file, line);
+		}
+
+		static void CheckEqual(char * actual, const char * expected, const char * file, uint32_t line)
+		{
+			CheckEqualForCStrings(actual, expected, file, line);
+		}
+
+		static void CheckEqualForCStrings(const char * actual, const char * expected, const char * file, uint32_t line)
+		{
+			//std::cout << "CheckEqualForCStrings called." << std::endl;
 			//std::cout << "strcmp() = '" << strcmp(expected, actual) << "'." << std::endl;
 			if (strcmp(actual, expected))
 			{
