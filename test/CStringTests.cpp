@@ -2,7 +2,7 @@
 //! @file 			CStringTests.cpp
 //! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created		2014-09-26
-//! @last-modified 	2014-09-26
+//! @last-modified 	2017-06-27
 //! @brief 			Contains tests which makes sure CHECK_EQUAL() works for all types of C-string (const and non-const).
 //! @details
 //!					See README.rst in root dir for more info.
@@ -11,7 +11,7 @@
 #include <iostream>
 
 // User source
-#include "../api/MUnitTestApi.hpp"
+#include "MUnitTest/MUnitTestApi.hpp"
 
 using namespace MbeddedNinja;
 

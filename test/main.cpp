@@ -2,7 +2,7 @@
 //! @file 			main.cpp
 //! @author 		Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created		2014-09-04
-//! @last-modified 	2014-09-04
+//! @last-modified 	2017-06-27
 //! @brief 			Contains main entry point for unit tests.
 //! @details
 //!					See README.rst in root dir for more info.
@@ -12,7 +12,7 @@
 #include <iostream>
 
 // User source
-#include "../api/MUnitTestApi.hpp"
+#include "MUnitTest/MUnitTestApi.hpp"
 
 using namespace MbeddedNinja;
 

@@ -11,7 +11,7 @@
 #include <iostream>
 
 // User source
-#include "../api/MUnitTestApi.hpp"
+#include "MUnitTest/MUnitTestApi.hpp"
 
 using namespace MbeddedNinja;
 

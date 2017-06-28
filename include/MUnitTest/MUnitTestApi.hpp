@@ -2,7 +2,7 @@
 //! @file				MUnitTestApi.hpp
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-09-04
-//! @last-modified		2014-09-04
+//! @last-modified		2017-06-27
 //! @brief				API header for MUnitTest module.
 //! @details
 //!						See README.rst in repo root dir for more info.
@@ -18,7 +18,7 @@
 #ifndef MUNITTEST_CPP_MUNITTEST_API_H
 #define MUNITTEST_CPP_MUNITTEST_API_H
 
-#include "../include/MUnitTest.hpp"
+#include "MUnitTest/MUnitTest.hpp"
 
 #endif	// #ifndef MUNITTEST_CPP_MUNITTEST_API_H
 

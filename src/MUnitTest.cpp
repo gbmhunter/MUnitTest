@@ -25,7 +25,7 @@
 // none
 
 // User source
-#include "../include/MUnitTest.hpp"
+#include "MUnitTest/MUnitTest.hpp"
 
 
 //===============================================================================================//
